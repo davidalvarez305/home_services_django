@@ -24,11 +24,12 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
+SERVER_IP = os.environ.get('SERVER_IP')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = str(os.environ.get('PRODUCTION')) != "1"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [SERVER_IP]
 
 # Environment Variables
 domain = os.environ.get('DOMAIN')
@@ -37,6 +38,7 @@ server_ip = os.environ.get('SERVER_IP')
 # Application definition
 
 INSTALLED_APPS = [
+    'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
