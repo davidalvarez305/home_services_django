@@ -1,3 +1,15 @@
+from datetime import date
+import os
 from django.shortcuts import render
 
-# Create your views here.
+# Environment Variables
+DOMAIN = str(os.environ.get('DOMAIN'))
+SITE_NAME = str(os.environ.get('SITE_NAME'))
+CURRENT_YEAR = date.today().year
+
+def home(request):
+    print(request)
+
+    return render(request, 'blog/home.html', {
+        'user': 'yo'
+    })
