@@ -9,10 +9,12 @@
     <title>My Website</title>
     <link rel="stylesheet" href="{% static 'blog/style.css' %}">
     <link rel="icon" href="{% static 'blog/favicon.ico' %}" type="image/x-icon">
+    {{ user|json_script:"current" }}
   </head>
   <body>
     <main>
-        <h1 id="welcome">Welcome to My Website</h1>  
+        <h1 id="welcome">Welcome to My Website</h1>
+        <h1 id="user">My Name</h1>  
     </main>
 	<script defer src="{% static 'blog/index.js' %}"></script>
   </body>

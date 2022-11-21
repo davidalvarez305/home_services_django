@@ -8,8 +8,7 @@ SITE_NAME = str(os.environ.get('SITE_NAME'))
 CURRENT_YEAR = date.today().year
 
 def home(request):
-    print(request)
-
+    print(request.user)
     return render(request, 'blog/home.html', {
-        'user': 'yo'
+        'user': { 'name': 'David' }
     })
