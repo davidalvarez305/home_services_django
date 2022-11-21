@@ -1,1 +1,3 @@
-console.log("yo");
+const welcome = document.getElementById('welcome');
+
+welcome.innerHTML = "Hey!"
