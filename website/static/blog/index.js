@@ -1,24 +1,10 @@
-const welcome = document.getElementById("welcome");
-const user = document.getElementById("user");
+const quoteButton = document.getElementById("quote-button");
+const zipCodeInput = document.getElementById("widget-subscribe-form-email");
 
-welcome.innerHTML = "Hey!";
+quoteButton.addEventListener("click", function (e) {
+  window.location.replace('http://127.0.0.1:8000/' + '?zip_code=' + zipCodeInput.value)
+});
 
-function fetchData() {
-  fetch("https://jsonplaceholder.typicode.com/todos/1")
-    .then((res) =>
-      res.json().then((data) => {
-        user.innerHTML = data.title;
-      })
-    )
-    .catch((err) => console.log(err));
+document.body.onload = function () {
+    console.log(window.location.href);
 }
-
-const data = JSON.parse(document.getElementById("current").textContent);
-
-user.addEventListener("click", function (e) {
-  user.innerHTML = data.name;
-});
-
-welcome.addEventListener("click", function (e) {
-  fetchData();
-});
