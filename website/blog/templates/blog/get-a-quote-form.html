@@ -16,8 +16,18 @@
                     </div>
 
                     <div class="col-md-6 form-group">
-                        <label class="nott" for="quote-name">Name <small>*</small></label>
-                        <input type="text" id="quote-name" value="" class="sm-form-control required" />
+                        <label class="nott" for="quote-first-name">First Name <small>*</small></label>
+                        <input type="text" id="quote-first-name" value="" class="sm-form-control required" />
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="nott" for="quote-last-name">Last Name <small>*</small></label>
+                        <input type="text" id="quote-last-name" value="" class="sm-form-control required" />
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="nott" for="quote-phone">Phone</label>
+                        <input type="tel" id="quote-phone" value="" class="sm-form-control" />
                     </div>
 
                     <div class="col-md-6 form-group">
@@ -26,11 +36,6 @@
                     </div>
 
                     <div class="clear"></div>
-
-                    <div class="col-12 form-group">
-                        <label class="nott" for="quote-phone">Phone</label>
-                        <input type="text" id="quote-phone" value="" class="sm-form-control" />
-                    </div>
 
                     <div class="col-12 form-group">
                         <label class="nott" for="quote-message">Message <small>*</small></label>
@@ -50,18 +55,23 @@
 
 <script>
     const getAQuoteForm = document.getElementById('get-a-quote-form');
-    const fullName = document.getElementById('quote-name');
+    const firstName = document.getElementById('quote-first-name');
+    const lastName = document.getElementById('quote-last-name');
     const email = document.getElementById('quote-email');
     const phone = document.getElementById('quote-phone');
     const message = document.getElementById('quote-message');
     const zipCode = window.location.href.split('?zip_code=')[1];
 
+    const body = {
+        first_name: firstName.value,
+        last_name: lastName.value,
+        email: email.value,
+        phone_number: phone.value,
+        zip_code: zipCode
+    }
+
     getAQuoteForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        console.log('full name: ', fullName.value);
-        console.log('email: ', email.value);
-        console.log('phone: ', phone.value);
-        console.log('message: ', message.value);
-        console.log('zipCode: ', zipCode);
+        console.log('form vals: ', body);
     });
 </script>
