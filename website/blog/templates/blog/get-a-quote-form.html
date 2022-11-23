@@ -37,6 +37,11 @@
 
                     <div class="clear"></div>
 
+                    <div class="col-md-6 form-group">
+                        <label class="nott" for="quote-pictures">Pictures</label>
+                        <input type="file" accept="image/*" id="quote-pictures" multiple="multiple">
+                    </div>
+
                     <div class="col-12 form-group">
                         <label class="nott" for="quote-message">Message <small>*</small></label>
                         <textarea class="required sm-form-control" id="quote-message" rows="6" cols="30"></textarea>
@@ -54,6 +59,7 @@
 </section>
 
 <script>
+    const fd = new FormData();
     const getAQuoteForm = document.getElementById('get-a-quote-form');
     const firstName = document.getElementById('quote-first-name');
     const lastName = document.getElementById('quote-last-name');
@@ -61,6 +67,13 @@
     const phone = document.getElementById('quote-phone');
     const message = document.getElementById('quote-message');
     const zipCode = window.location.href.split('?zip_code=')[1];
+    const imageUpload = document.getElementById('quote-pictures');
+
+    imageUpload.addEventListener('change', function(e) {
+        for (let i = 0; i < e.target.files.length; i++) {
+            fd.append('images', e.target.files[i], e.target.files[i].name);
+        }
+    })
 
     const body = {
         first_name: firstName.value,
@@ -72,6 +85,8 @@
 
     getAQuoteForm.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        console.log('fd: ', fd);
         console.log('form vals: ', body);
     });
 </script>
