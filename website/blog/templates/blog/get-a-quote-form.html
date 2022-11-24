@@ -13,57 +13,28 @@
           </div>
 
           <div class="col-md-6 form-group">
-            <label class="nott" for="quote-first-name"
-              >First Name <small>*</small></label
-            >
-            <input
-              type="text"
-              id="quote-first-name"
-              value=""
-              class="sm-form-control required"
-            />
+            <label class="nott" for="quote-first-name">First Name <small>*</small></label>
+            <input type="text" id="quote-first-name" value="" class="sm-form-control required" />
           </div>
 
           <div class="col-md-6 form-group">
-            <label class="nott" for="quote-last-name"
-              >Last Name <small>*</small></label
-            >
-            <input
-              type="text"
-              id="quote-last-name"
-              value=""
-              class="sm-form-control required"
-            />
+            <label class="nott" for="quote-last-name">Last Name <small>*</small></label>
+            <input type="text" id="quote-last-name" value="" class="sm-form-control required" />
           </div>
 
           <div class="col-md-6 form-group">
             <label class="nott" for="quote-phone">Phone</label>
-            <input
-              type="tel"
-              id="quote-phone"
-              value=""
-              class="sm-form-control"
-            />
+            <input type="tel" id="quote-phone" value="" class="sm-form-control" />
           </div>
 
           <div class="col-md-6 form-group">
             <label class="nott" for="quote-email">Email <small>*</small></label>
-            <input
-              type="email"
-              id="quote-email"
-              value=""
-              class="required email sm-form-control"
-            />
+            <input type="email" id="quote-email" value="" class="required email sm-form-control" />
           </div>
 
           <div class="col-md-6 form-group">
             <label class="nott" for="quote-budget">Project Budget <small>*</small></label>
-            <input
-              type="number"
-              id="quote-budget"
-              value=""
-              class="required budget sm-form-control"
-            />
+            <input type="number" id="quote-budget" value="" class="required budget sm-form-control" />
           </div>
 
           <div class="clear"></div>
@@ -78,11 +49,7 @@
           </div>
 
           <div class="col-12 form-group">
-            <button
-              class="button button-rounded button-large m-0"
-              type="submit"
-              id="quote-submit-button"
-            >
+            <button class="button button-rounded button-large m-0" type="submit" id="quote-submit-button">
               Submit
             </button>
           </div>
@@ -100,7 +67,7 @@
   const phone = document.getElementById("quote-phone");
   const zipCode = window.location.href.split("?zip_code=")[1];
   const services = document.getElementById("quote-services");
-  const budget = document.getElementById('quote-budget');
+  const budget = document.getElementById("quote-budget");
 
   const body = {
     first_name: firstName.value,
@@ -109,30 +76,36 @@
     phone_number: phone.value,
     zip_code: zipCode,
     services: services.value,
-    budget: budget.value
+    budget: budget.value,
   };
 
   getAQuoteForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    window.gtag('event', 'lead_created', {
-        currency: 'USD',
-        budgetAmount: budget.value
-    });
-
-    window.fbq()
 
     fetch("http://127.0.0.1/api/user", {
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
-      credentials: 'include',
+      credentials: "include",
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
+        if (data.data) {
+
+          // Send successful lead creation to Google Analytics
+          window.gtag("event", "lead_created", {
+            currency: "USD",
+            budgetAmount: budget.value,
+          });
+
+          // Send successful lead creation to Meta Analytics
+          window.fbq("trackCustom", "lead_created", {
+            currency: "USD",
+            value: budget.value,
+          });
+        }
       })
       .catch(console.error);
   });
