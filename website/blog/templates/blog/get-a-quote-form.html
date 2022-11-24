@@ -1,103 +1,137 @@
 {% load static %}
 <section id="content">
-    <div class="content-wrap clearfix">
-        <div class="container">
+  <div class="content-wrap clearfix">
+    <div class="container">
+      <div class="form-widget mt-5 mx-auto" style="max-width: 750px">
+        <div class="form-result"></div>
 
-            <div class="form-widget mt-5 mx-auto" style="max-width: 750px">
-
-                <div class="form-result"></div>
-
-                <form class="row mb-0" id="get-a-quote-form">
-
-                    <div class="form-process">
-                        <div class="css3-spinner">
-                            <div class="css3-spinner-scaler"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 form-group">
-                        <label class="nott" for="quote-first-name">First Name <small>*</small></label>
-                        <input type="text" id="quote-first-name" value="" class="sm-form-control required" />
-                    </div>
-
-                    <div class="col-md-6 form-group">
-                        <label class="nott" for="quote-last-name">Last Name <small>*</small></label>
-                        <input type="text" id="quote-last-name" value="" class="sm-form-control required" />
-                    </div>
-
-                    <div class="col-md-6 form-group">
-                        <label class="nott" for="quote-phone">Phone</label>
-                        <input type="tel" id="quote-phone" value="" class="sm-form-control" />
-                    </div>
-
-                    <div class="col-md-6 form-group">
-                        <label class="nott" for="quote-email">Email <small>*</small></label>
-                        <input type="email" id="quote-email" value="" class="required email sm-form-control" />
-                    </div>
-
-                    <div class="clear"></div>
-
-                    <div class="col-md-6 form-group">
-                        <label class="nott" for="quote-pictures">Pictures</label>
-                        <input type="file" accept="image/*" id="quote-pictures" multiple="multiple">
-                    </div>
-
-                    <div class="col-12 form-group">
-                        <label for="quote-services">Choose Services:</label>
-                        <select id="quote-services">
-                            <option value="">--Please choose an option--</option>
-                            <option value="home remodeling">Home Remodeling</option>
-                            <option value="bathroom remodeling">Bathroom Remodeling</option>
-                        </select>
-                    </div>
-
-                    <div class="col-12 form-group">
-                        <label class="nott" for="quote-message">Message <small>*</small></label>
-                        <textarea class="required sm-form-control" id="quote-message" rows="6" cols="30"></textarea>
-                    </div>
-
-                    <div class="col-12 form-group">
-                        <button class="button button-rounded button-large m-0" type="submit" id="quote-submit-button">Submit</button>
-                    </div>
-
-                </form>
+        <form class="row mb-0" id="get-a-quote-form">
+          <div class="form-process">
+            <div class="css3-spinner">
+              <div class="css3-spinner-scaler"></div>
             </div>
+          </div>
 
-        </div>
+          <div class="col-md-6 form-group">
+            <label class="nott" for="quote-first-name"
+              >First Name <small>*</small></label
+            >
+            <input
+              type="text"
+              id="quote-first-name"
+              value=""
+              class="sm-form-control required"
+            />
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label class="nott" for="quote-last-name"
+              >Last Name <small>*</small></label
+            >
+            <input
+              type="text"
+              id="quote-last-name"
+              value=""
+              class="sm-form-control required"
+            />
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label class="nott" for="quote-phone">Phone</label>
+            <input
+              type="tel"
+              id="quote-phone"
+              value=""
+              class="sm-form-control"
+            />
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label class="nott" for="quote-email">Email <small>*</small></label>
+            <input
+              type="email"
+              id="quote-email"
+              value=""
+              class="required email sm-form-control"
+            />
+          </div>
+
+          <div class="col-md-6 form-group">
+            <label class="nott" for="quote-budget">Project Budget <small>*</small></label>
+            <input
+              type="number"
+              id="quote-budget"
+              value=""
+              class="required budget sm-form-control"
+            />
+          </div>
+
+          <div class="clear"></div>
+
+          <div class="col-12 form-group">
+            <label for="quote-services">Choose Services:</label>
+            <select id="quote-services">
+              <option value="">--Please choose an option--</option>
+              <option value="home remodeling">Home Remodeling</option>
+              <option value="bathroom remodeling">Bathroom Remodeling</option>
+            </select>
+          </div>
+
+          <div class="col-12 form-group">
+            <button
+              class="button button-rounded button-large m-0"
+              type="submit"
+              id="quote-submit-button"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </section>
 
 <script>
-    const fd = new FormData();
-    const getAQuoteForm = document.getElementById('get-a-quote-form');
-    const firstName = document.getElementById('quote-first-name');
-    const lastName = document.getElementById('quote-last-name');
-    const email = document.getElementById('quote-email');
-    const phone = document.getElementById('quote-phone');
-    const message = document.getElementById('quote-message');
-    const zipCode = window.location.href.split('?zip_code=')[1];
-    const imageUpload = document.getElementById('quote-pictures');
-    const services = document.getElementById('quote-services');
+  const getAQuoteForm = document.getElementById("get-a-quote-form");
+  const firstName = document.getElementById("quote-first-name");
+  const lastName = document.getElementById("quote-last-name");
+  const email = document.getElementById("quote-email");
+  const phone = document.getElementById("quote-phone");
+  const zipCode = window.location.href.split("?zip_code=")[1];
+  const services = document.getElementById("quote-services");
+  const budget = document.getElementById('quote-budget');
 
-    imageUpload.addEventListener('change', function(e) {
-        for (let i = 0; i < e.target.files.length; i++) {
-            fd.append('images', e.target.files[i], e.target.files[i].name);
-        }
-    })
+  const body = {
+    first_name: firstName.value,
+    last_name: lastName.value,
+    email: email.value,
+    phone_number: phone.value,
+    zip_code: zipCode,
+    services: services.value,
+    budget: budget.value
+  };
 
-    const body = {
-        first_name: firstName.value,
-        last_name: lastName.value,
-        email: email.value,
-        phone_number: phone.value,
-        zip_code: zipCode,
-        services: services.value,
-    }
+  getAQuoteForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-    getAQuoteForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        console.log('fd: ', fd);
-        console.log('form vals: ', body);
+    window.gtag('event', 'lead_created', {
+        currency: 'USD',
+        budgetAmount: budget.value
     });
+
+    fetch("http://127.0.0.1/api/user", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      credentials: 'include',
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data);
+      })
+      .catch(console.error);
+  });
 </script>
