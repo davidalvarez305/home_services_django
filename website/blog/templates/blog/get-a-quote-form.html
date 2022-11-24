@@ -112,13 +112,15 @@
     budget: budget.value
   };
 
-  getAQuoteForm.addEventListener("submit", async function (e) {
+  getAQuoteForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     window.gtag('event', 'lead_created', {
         currency: 'USD',
         budgetAmount: budget.value
     });
+
+    window.fbq()
 
     fetch("http://127.0.0.1/api/user", {
       headers: {
