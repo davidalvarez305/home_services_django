@@ -60,27 +60,34 @@
 </section>
 
 <script>
-  const getAQuoteForm = document.getElementById("get-a-quote-form");
-  const firstName = document.getElementById("quote-first-name");
-  const lastName = document.getElementById("quote-last-name");
-  const email = document.getElementById("quote-email");
-  const phone = document.getElementById("quote-phone");
-  const zipCode = window.location.href.split("?zip_code=")[1];
-  const services = document.getElementById("quote-services");
-  const budget = document.getElementById("quote-budget");
-
-  const body = {
-    first_name: firstName.value,
-    last_name: lastName.value,
-    email: email.value,
-    phone_number: phone.value,
-    zip_code: zipCode,
-    services: services.value,
-    budget: budget.value,
-  };
+  var getAQuoteForm = document.getElementById("get-a-quote-form");
+  var firstName = document.getElementById("quote-first-name");
+  var lastName = document.getElementById("quote-last-name");
+  var email = document.getElementById("quote-email");
+  var phone = document.getElementById("quote-phone");
+  var service = document.getElementById("quote-services");
+  var budget = document.getElementById("quote-budget");
 
   getAQuoteForm.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    var marketing = {};
+
+    for (const [key, value] of window.qs) {
+      marketing[key] = value;
+    }
+
+    var body = {
+      ...marketing,
+      first_name: firstName.value,
+      last_name: lastName.value,
+      email: email.value,
+      phone_number: phone.value,
+      service: service.value,
+      budget: Number(budget.value),
+    };
+
+    console.log(body);
 
     fetch("http://127.0.0.1/api/user", {
       headers: {
