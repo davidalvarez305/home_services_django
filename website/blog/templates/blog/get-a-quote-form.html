@@ -77,9 +77,6 @@
       marketing[key] = value;
     }
 
-    marketing['landing_page'] = window.location.href;
-    marketing['lead_channel'] = window.getLeadChannel();
-
     var body = {
       ...marketing,
       first_name: firstName.value,
