@@ -8,7 +8,7 @@ function getLeadChannel() {
   // No referrer means the user accessed the website directly
   if (document.referrer.length === "") return "direct";
 
-  // If we get to this point, it means that document.referrer is not null
+  // If we get to this point, it means that document.referrer is not empty
   // If there's no paid traffic because 'medium' is empty -> it's organic
   if (!qs.get('medium')) return "organic";
 
