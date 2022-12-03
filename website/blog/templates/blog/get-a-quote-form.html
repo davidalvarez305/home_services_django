@@ -77,6 +77,12 @@
       marketing[key] = value;
     }
 
+    var leadChannel = window.qs.get('medium') === "cpc" ? "cpc" : "organic"
+
+    marketing['campaign'] = window.qs.get('campaign');
+    marketing['referral_url'] = window.location.href;
+    marketing['lead_channel'] = leadChannel;
+
     var body = {
       ...marketing,
       first_name: firstName.value,

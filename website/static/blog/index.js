@@ -5,7 +5,8 @@ var qs = new URLSearchParams(window.location.search);
 
 quoteButton.addEventListener("click", function (e) {
 
-  qs.set('zip_code', zipCodeInput.value)
+  qs.set('zip_code', zipCodeInput.value);
+  qs.set('referrer', document.referrer);
 
   window.location.replace(
     "http://127.0.0.1:8000/get-a-quote/?" + qs.toString()
