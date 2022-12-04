@@ -9,18 +9,19 @@ function getLeadChannel() {
   if (document.referrer.length === 0) return "direct";
 
   // If we get to this point, it means that document.referrer is not empty
-  // If there's no paid traffic because 'medium' is empty -> it's organic
-  if (!qs.get('medium')) return "organic";
+  if (qs.entries.length === 0) return "organic";
 
   return "paid";
 }
 
 quoteButton.addEventListener("click", function (e) {
 
+  // This set method must be first in order for the getLeadChannel logic to work correctly
+  // Because it checks that all qs.entries are of length 0 ('meaning organic traffic')
+  qs.set('lead_channel', getLeadChannel());
   qs.set('zip_code', zipCodeInput.value);
   qs.set('referrer', document.referrer);
   qs.set('landing_page', window.location.href);
-  qs.set('lead_channel', getLeadChannel());
 
   window.location.replace(
     "http://127.0.0.1:8000/get-a-quote/?" + qs.toString()
