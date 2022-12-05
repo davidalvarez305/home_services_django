@@ -2,12 +2,14 @@ Initialize env
 
 ```
 env\Scripts\activate.bat
+
+source env/bin/activate
 ```
 
 Start server
 
 ```
-py manage.py runserver
+source env/bin/activate && cd website && python manage.py runserver
 ```
 
 Clone Project

@@ -83,13 +83,13 @@
       last_name: lastName.value,
       email: email.value,
       phone_number: phone.value,
-      service: service.value,
+      service: 6, // service.value
       budget: Number(budget.value),
     };
 
     console.log(body);
 
-    fetch("http://127.0.0.1/api/user", {
+    fetch("http://localhost:4015/api/lead", {
       headers: {
         "Content-Type": "application/json",
       },
