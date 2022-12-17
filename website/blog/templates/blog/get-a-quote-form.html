@@ -71,11 +71,7 @@
   getAQuoteForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    var marketing = {};
-
-    for (const [key, value] of window.qs) {
-      marketing[key] = value;
-    }
+    var marketing = Object.fromEntries(window.qs);
 
     var body = {
       ...marketing,
